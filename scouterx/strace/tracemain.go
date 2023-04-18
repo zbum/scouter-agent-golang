@@ -245,6 +245,23 @@ func EndHttpService(ctx context.Context, req *http.Request, res *http.Response) 
 	endAnyService(ctx)
 }
 
+func EndFastHttpService(ctx context.Context, c *fasthttp.RequestCtx) {
+	defer common.ReportScouterPanic()
+	//TODO body (of specific service) profile from req.body
+
+	if c != nil {
+		if ctx == nil {
+			return
+		}
+		tctx := tctxmanager.GetTraceContext(ctx)
+		if tctx == nil || tctx.Closed {
+			return
+		}
+		tctx.Status = int32(c.Response.StatusCode())
+	}
+	endAnyService(ctx)
+}
+
 func StartService(ctx context.Context, serviceName, remoteIp string) (newCtx context.Context) {
 	defer common.ReportScouterPanic()
 	if ctx == nil {
