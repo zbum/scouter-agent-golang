@@ -1,4 +1,4 @@
-module github.com/scouter-contrib/scouter-agent-golang
+module github.com/zbum/scouter-agent-golang
 
 go 1.15
 
