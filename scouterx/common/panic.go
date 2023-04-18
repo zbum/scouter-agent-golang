@@ -2,7 +2,7 @@ package common
 
 import (
 	"fmt"
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/dump"
+	"github.com/zbum/scouter-agent-golang/scouterx/dump"
 	"runtime"
 	"strconv"
 	"strings"
@@ -33,4 +33,3 @@ func Goid() int {
 	}
 	return id
 }
-

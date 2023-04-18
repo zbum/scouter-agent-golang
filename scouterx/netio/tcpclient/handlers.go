@@ -1,18 +1,19 @@
 package tcpclient
 
 import (
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/common"
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/conf"
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/dump"
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/netio"
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/strace/tctxmanager"
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/common/logger"
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/common/netdata"
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/common/util"
+	"github.com/zbum/scouter-agent-golang/scouterx/common"
+	"github.com/zbum/scouter-agent-golang/scouterx/common/logger"
+	"github.com/zbum/scouter-agent-golang/scouterx/common/netdata"
+	"github.com/zbum/scouter-agent-golang/scouterx/common/util"
+	"github.com/zbum/scouter-agent-golang/scouterx/conf"
+	"github.com/zbum/scouter-agent-golang/scouterx/dump"
+	"github.com/zbum/scouter-agent-golang/scouterx/netio"
+	"github.com/zbum/scouter-agent-golang/scouterx/strace/tctxmanager"
 	"strconv"
 )
 
-const OBJECT_RESET_CACHE string = "OBJECT_RESET_CACHE";
+const OBJECT_RESET_CACHE string = "OBJECT_RESET_CACHE"
+
 const TRIGGER_THREAD_DUMP string = "TRIGGER_THREAD_DUMP"
 const OBJECT_DUMP_FILE_LIST string = "OBJECT_DUMP_FILE_LIST"
 const OBJECT_DUMP_FILE_DETAIL string = "OBJECT_DUMP_FILE_DETAIL"
@@ -26,7 +27,6 @@ const OBJECT_DELETE_HEAP_DUMP string = "OBJECT_DELETE_HEAP_DUMP"
 const OBJECT_CALL_CPU_PROFILE string = "OBJECT_CALL_CPU_PROFILE"
 const OBJECT_CALL_BLOCK_PROFILE string = "OBJECT_CALL_BLOCK_PROFILE"
 const OBJECT_CALL_MUTEX_PROFILE string = "OBJECT_CALL_MUTEX_PROFILE"
-
 
 const GET_CONFIGURE_WAS string = "GET_CONFIGURE_WAS"
 const SET_CONFIGURE_WAS string = "SET_CONFIGURE_WAS"
@@ -153,7 +153,7 @@ func handle(cmd string, pack netdata.Pack, in *netdata.DataInputX, out *netdata.
 }
 
 func deleteBinaryDump(pack netdata.Pack, out *netdata.DataOutputX) netdata.Pack {
-	paramPack, ok := pack.(*netdata.MapPack);
+	paramPack, ok := pack.(*netdata.MapPack)
 	if !ok {
 		return nil
 	}
@@ -161,7 +161,7 @@ func deleteBinaryDump(pack netdata.Pack, out *netdata.DataOutputX) netdata.Pack 
 }
 
 func downloadBinaryDump(pack netdata.Pack, out *netdata.DataOutputX) netdata.Pack {
-	paramPack, ok := pack.(*netdata.MapPack);
+	paramPack, ok := pack.(*netdata.MapPack)
 	if !ok {
 		return nil
 	}
@@ -176,68 +176,68 @@ func listBinaryDump(pack netdata.Pack, out *netdata.DataOutputX) netdata.Pack {
 func triggerBinaryCpuProfile(pack netdata.Pack, out *netdata.DataOutputX) netdata.Pack {
 	dump.ProfileBinaryCpu(30)
 	p := netdata.NewMapPack()
-	p.Put("success", netdata.NewBooleanValue(true));
-	p.Put("msg", "Success. it take about 30 seconds.");
+	p.Put("success", netdata.NewBooleanValue(true))
+	p.Put("msg", "Success. it take about 30 seconds.")
 	return p
 }
 
 func triggerBlockProfile(pack netdata.Pack, out *netdata.DataOutputX) *netdata.MapPack {
-	dump.ProfileBlock(30, 1000 * 1000, 1)
+	dump.ProfileBlock(30, 1000*1000, 1)
 	p := netdata.NewMapPack()
-	p.Put("success", netdata.NewBooleanValue(true));
-	p.Put("msg", "Success. it take about 30 seconds.");
+	p.Put("success", netdata.NewBooleanValue(true))
+	p.Put("msg", "Success. it take about 30 seconds.")
 	return p
 }
 
 func triggerMutexProfile(pack netdata.Pack, out *netdata.DataOutputX) *netdata.MapPack {
 	dump.ProfileMutex(30, 10, 1)
 	p := netdata.NewMapPack()
-	p.Put("success", netdata.NewBooleanValue(true));
-	p.Put("msg", "Success. it take about 30 seconds.");
+	p.Put("success", netdata.NewBooleanValue(true))
+	p.Put("msg", "Success. it take about 30 seconds.")
 	return p
 }
 
 func triggerBinaryBlockProfile(pack netdata.Pack, out *netdata.DataOutputX) *netdata.MapPack {
-	dump.ProfileBlockBinaryDump(30, 1000 * 1000)
+	dump.ProfileBlockBinaryDump(30, 1000*1000)
 	p := netdata.NewMapPack()
-	p.Put("success", netdata.NewBooleanValue(true));
-	p.Put("msg", "Success. it take about 30 seconds.");
+	p.Put("success", netdata.NewBooleanValue(true))
+	p.Put("msg", "Success. it take about 30 seconds.")
 	return p
 }
 
 func triggerBinaryMutexProfile(pack netdata.Pack, out *netdata.DataOutputX) *netdata.MapPack {
 	dump.ProfileMutexBinaryDump(30, 5)
 	p := netdata.NewMapPack()
-	p.Put("success", netdata.NewBooleanValue(true));
-	p.Put("msg", "Success. it take about 30 seconds.");
+	p.Put("success", netdata.NewBooleanValue(true))
+	p.Put("msg", "Success. it take about 30 seconds.")
 	return p
 }
 
 func GetGoroutineDetail(param netdata.Pack) *netdata.MapPack {
 	p := netdata.NewMapPack()
-	p.Put("Thread Name", "[No Goroutine] End");
-	p.Put("State", "end");
+	p.Put("Thread Name", "[No Goroutine] End")
+	p.Put("State", "end")
 
-	paramPack, ok := param.(*netdata.MapPack);
+	paramPack, ok := param.(*netdata.MapPack)
 	if !ok {
-		p.Put("Stack Trace", "[info] scouter request param error.");
+		p.Put("Stack Trace", "[info] scouter request param error.")
 		return p
 	}
 	txid := paramPack.GetInt64("txid")
 	tctx := tctxmanager.GetTraceContextByTxid(txid)
 	if tctx == nil {
-		p.Put("Stack Trace", "[info] no traceContext. txid:" + util.IntToXlogString32(txid))
+		p.Put("Stack Trace", "[info] no traceContext. txid:"+util.IntToXlogString32(txid))
 		return p
 	}
 	goid := tctx.Goid
-	p.Put("Service Txid", util.IntToXlogString32(tctx.Txid));
-	p.Put("Service Name", tctx.ServiceName);
-	p.Put("Service Elapsed", util.MillisToNow(tctx.StartTime));
-	p.Put("Thread Id", -1);
-	p.Put("State", "n/a");
-	p.Put("Thread Name", "[goroutine] " + strconv.Itoa(goid));
-	p.Put("Stack Trace", "stacktrace for goroutine is not yet supported");
-	p.Put("Last trace method", tctx.LastMethod);
+	p.Put("Service Txid", util.IntToXlogString32(tctx.Txid))
+	p.Put("Service Name", tctx.ServiceName)
+	p.Put("Service Elapsed", util.MillisToNow(tctx.StartTime))
+	p.Put("Thread Id", -1)
+	p.Put("State", "n/a")
+	p.Put("Thread Name", "[goroutine] "+strconv.Itoa(goid))
+	p.Put("Stack Trace", "stacktrace for goroutine is not yet supported")
+	p.Put("Last trace method", tctx.LastMethod)
 
 	return p
 }

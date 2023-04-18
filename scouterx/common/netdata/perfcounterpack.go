@@ -1,13 +1,13 @@
 package netdata
 
 import (
-	packconstants "github.com/scouter-contrib/scouter-agent-golang/scouterx/common/constants/packconstant"
+	packconstants "github.com/zbum/scouter-agent-golang/scouterx/common/constants/packconstant"
 )
 
 const TimeTypeRealTime int8 = 1
 const TimeTypeFiveMin int8 = 3
 
-//PerfCounterPack has metric counter which has key/value type
+// PerfCounterPack has metric counter which has key/value type
 type PerfCounterPack struct {
 	Time     int64
 	ObjName  string
@@ -74,7 +74,7 @@ func (pack *PerfCounterPack) ToString() string {
 	return str
 }
 
-//GetPackType returns pack type
+// GetPackType returns pack type
 func (pack *PerfCounterPack) GetPackType() byte {
 	return packconstants.PERFCOUNTER
 }

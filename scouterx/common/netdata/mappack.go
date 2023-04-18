@@ -1,7 +1,7 @@
 package netdata
 
 import (
-	packconstants "github.com/scouter-contrib/scouter-agent-golang/scouterx/common/constants/packconstant"
+	packconstants "github.com/zbum/scouter-agent-golang/scouterx/common/constants/packconstant"
 )
 
 type MapPack struct {

@@ -4,10 +4,10 @@ import (
 	"bufio"
 	"errors"
 	"fmt"
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/common/constants/tcpflag"
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/common/logger"
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/common/netdata"
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/common/util"
+	"github.com/zbum/scouter-agent-golang/scouterx/common/constants/tcpflag"
+	"github.com/zbum/scouter-agent-golang/scouterx/common/logger"
+	"github.com/zbum/scouter-agent-golang/scouterx/common/netdata"
+	"github.com/zbum/scouter-agent-golang/scouterx/common/util"
 	"io"
 	"os"
 	"path"
@@ -50,7 +50,6 @@ func StackTrace(count int) string {
 	return sb.String()
 }
 
-
 func HeavyAllStackTrace() netdata.Pack {
 	fileName, err := heavyAllStackTrace()
 	pack := netdata.NewMapPack()
@@ -62,7 +61,7 @@ func HeavyAllStackTrace() netdata.Pack {
 }
 
 func heavyAllStackTrace() (string, error) {
-	fileName := filepath.Join(getDumpPath(), "go_dump_" + time.Now().Format("20060102_150405") + ".log")
+	fileName := filepath.Join(getDumpPath(), "go_dump_"+time.Now().Format("20060102_150405")+".log")
 
 	var w io.Writer = os.Stdout
 	if fileName != "" {
@@ -83,7 +82,7 @@ func heavyAllStackTrace() (string, error) {
 }
 
 func ProfileBinaryCpu(sec int) netdata.Pack {
-	fileName := filepath.Join(getBinaryDumpPath(), "go_cpu_" + time.Now().Format("20060102_150405") + "." + suffix)
+	fileName := filepath.Join(getBinaryDumpPath(), "go_cpu_"+time.Now().Format("20060102_150405")+"."+suffix)
 
 	go profileCpu(fileName, sec)
 	pack := netdata.NewMapPack()
@@ -108,7 +107,7 @@ func profileCpu(fileName string, sec int) {
 }
 
 func ProfileBlock(sec, rate, level int) netdata.Pack {
-	fileName := filepath.Join(getDumpPath(), "go_block_" + time.Now().Format("20060102_150405") + ".log")
+	fileName := filepath.Join(getDumpPath(), "go_block_"+time.Now().Format("20060102_150405")+".log")
 
 	go profileBlock(fileName, sec, rate, level)
 	pack := netdata.NewMapPack()
@@ -116,7 +115,7 @@ func ProfileBlock(sec, rate, level int) netdata.Pack {
 }
 
 func ProfileBlockBinaryDump(sec, rate int) netdata.Pack {
-	fileName := filepath.Join(getBinaryDumpPath(), "go_block_" + time.Now().Format("20060102_150405") + "." + suffix)
+	fileName := filepath.Join(getBinaryDumpPath(), "go_block_"+time.Now().Format("20060102_150405")+"."+suffix)
 
 	go profileBlock(fileName, sec, rate, 0)
 	pack := netdata.NewMapPack()
@@ -148,21 +147,19 @@ func profileBlock(fileName string, sec, rate, level int) {
 	w.Flush()
 }
 
-
 func ProfileMutex(sec, rate, level int) {
-	fileName := filepath.Join(getDumpPath(), "go_mutex_" + time.Now().Format("20060102_150405") + ".log")
+	fileName := filepath.Join(getDumpPath(), "go_mutex_"+time.Now().Format("20060102_150405")+".log")
 
 	go profileMutex(fileName, sec, rate, level)
 	return
 }
 
 func ProfileMutexBinaryDump(sec, rate int) {
-	fileName := filepath.Join(getBinaryDumpPath(), "go_mutex_" + time.Now().Format("20060102_150405") + "." + suffix)
+	fileName := filepath.Join(getBinaryDumpPath(), "go_mutex_"+time.Now().Format("20060102_150405")+"."+suffix)
 
 	go profileMutex(fileName, sec, rate, 0)
 	return
 }
-
 
 func profileMutex(fileName string, sec, rate, level int) {
 	old := runtime.SetMutexProfileFraction(rate)
@@ -247,7 +244,7 @@ func ListBinaryDumpFiles() netdata.Pack {
 }
 
 func DownloadBinaryDumpFiles(out *netdata.DataOutputX, fileName string) {
-	if fileName == "" || !strings.HasSuffix(fileName, suffix){
+	if fileName == "" || !strings.HasSuffix(fileName, suffix) {
 		return
 	}
 	dumpPath := getBinaryDumpPath()
@@ -270,13 +267,13 @@ func DownloadBinaryDumpFiles(out *netdata.DataOutputX, fileName string) {
 			if err != io.EOF {
 				logger.Error.Printf("file read error: %s\n", err.Error())
 			} else {
-				out.WriteUInt8(tcpflag.HasNEXT);
-				out.WriteBlob(b[0:len]);
+				out.WriteUInt8(tcpflag.HasNEXT)
+				out.WriteBlob(b[0:len])
 			}
 			break
 		}
-		out.WriteUInt8(tcpflag.HasNEXT);
-		out.WriteBlob(b[0:len]);
+		out.WriteUInt8(tcpflag.HasNEXT)
+		out.WriteBlob(b[0:len])
 		offset = offset + int64(len)
 	}
 	return
@@ -284,7 +281,7 @@ func DownloadBinaryDumpFiles(out *netdata.DataOutputX, fileName string) {
 
 func DeleteBinaryDumpFiles(fileName string) netdata.Pack {
 	pack := netdata.NewMapPack()
-	if fileName == "" || !strings.HasSuffix(fileName, suffix){
+	if fileName == "" || !strings.HasSuffix(fileName, suffix) {
 		pack.Put("success", netdata.NewBooleanValue(false))
 		pack.Put("msg", "no fileName")
 		return pack
@@ -318,7 +315,7 @@ func StreamDumpFileContents(param netdata.Pack, out *netdata.DataOutputX) {
 	defer data.Close()
 
 	reader := bufio.NewReader(data)
-	part := make([]byte, 4 * 1024)
+	part := make([]byte, 4*1024)
 	var count int
 
 	for {

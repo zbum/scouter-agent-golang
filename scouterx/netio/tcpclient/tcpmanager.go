@@ -1,9 +1,9 @@
 package tcpclient
 
 import (
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/common"
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/conf"
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/common/logger"
+	"github.com/zbum/scouter-agent-golang/scouterx/common"
+	"github.com/zbum/scouter-agent-golang/scouterx/common/logger"
+	"github.com/zbum/scouter-agent-golang/scouterx/conf"
 	"time"
 )
 
@@ -13,7 +13,7 @@ func StartTcp() {
 }
 
 func startTcp() {
-	for (true) {
+	for true {
 		minSleep := 3000
 		sleep := minSleep
 		maxSleep := 60000

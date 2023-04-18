@@ -3,22 +3,22 @@ package netdata
 import (
 	"strconv"
 
-	valueconstants "github.com/scouter-contrib/scouter-agent-golang/scouterx/common/constants/valueconstant"
+	valueconstants "github.com/zbum/scouter-agent-golang/scouterx/common/constants/valueconstant"
 )
 
-//Float32Value has float32 value
+// Float32Value has float32 value
 type Float32Value struct {
 	Value float32
 }
 
-//NewFloatValue returns new FloatValue instance
+// NewFloatValue returns new FloatValue instance
 func NewFloatValue(value float32) *Float32Value {
 	floatValue := new(Float32Value)
 	floatValue.Value = value
 	return floatValue
 }
 
-//NewFloatEmptyValue returns new FloatValue instance
+// NewFloatEmptyValue returns new FloatValue instance
 func NewFloatEmptyValue() *Float32Value {
 	floatValue := new(Float32Value)
 	return floatValue

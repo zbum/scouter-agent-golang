@@ -1,22 +1,22 @@
 package netdata
 
 import (
-	packconstants "github.com/scouter-contrib/scouter-agent-golang/scouterx/common/constants/packconstant"
+	packconstants "github.com/zbum/scouter-agent-golang/scouterx/common/constants/packconstant"
 	"strconv"
 )
 
 const (
-	XTYPE_WEB_SERVICE XlogType = 0
-	XTYPE_APP_SERVICE XlogType = 1
-	XTYPE_BACK_THREAD XlogType = 2
+	XTYPE_WEB_SERVICE  XlogType = 0
+	XTYPE_APP_SERVICE  XlogType = 1
+	XTYPE_BACK_THREAD  XlogType = 2
 	XTYPE_BACK_THREAD2 XlogType = 4
-	XTYPE_ZIPKIN_SPAN XlogType = 5
-	XTYPE_UNKNOWN XlogType = 99
+	XTYPE_ZIPKIN_SPAN  XlogType = 5
+	XTYPE_UNKNOWN      XlogType = 99
 
-	XLOG_DISCARD_NONE XlogDiscardType = 1
-	XLOG_DISCARD_ALL XlogDiscardType = 2
-	XLOG_DISCARD_PROFILE XlogDiscardType = 3
-	XLOG_DISCARD_ALL_FORCE XlogDiscardType = 4
+	XLOG_DISCARD_NONE          XlogDiscardType = 1
+	XLOG_DISCARD_ALL           XlogDiscardType = 2
+	XLOG_DISCARD_PROFILE       XlogDiscardType = 3
+	XLOG_DISCARD_ALL_FORCE     XlogDiscardType = 4
 	XLOG_DISCARD_PROFILE_FORCE XlogDiscardType = 5
 )
 
@@ -30,36 +30,36 @@ type XlogPack struct {
 
 	Service int32
 
-	Txid int64
+	Txid           int64
 	ThreadNameHash int32
-	Caller int64
-	Gxid int64
+	Caller         int64
+	Gxid           int64
 
 	Elapsed int32
 
-	Error int32
-	Cpu int32
+	Error    int32
+	Cpu      int32
 	SqlCount int32
-	SqlTime int32
-	Ipaddr []byte
-	Kbytes int32
-	Status int32
-	Userid int64
+	SqlTime  int32
+	Ipaddr   []byte
+	Kbytes   int32
+	Status   int32
+	Userid   int64
 
 	UserAgent int32
-	Referer int32
-	Group int32
+	Referer   int32
+	Group     int32
 
 	ApicallCount int32
-	ApicallTime int32
+	ApicallTime  int32
 
 	CountryCode string
-	City int32
+	City        int32
 
 	XType XlogType
 
 	Login int32
-	Desc int32
+	Desc  int32
 
 	WebHash int32
 	WebTime int32
@@ -69,19 +69,19 @@ type XlogPack struct {
 	Text1 string
 	Text2 string
 
-	QueuingHostHash int32
-	QueuingTime int32
+	QueuingHostHash    int32
+	QueuingTime        int32
 	Queuing2ndHostHash int32
-	Queuing2ndTime int32
+	Queuing2ndTime     int32
 
 	Text3 string
 	Text4 string
 	Text5 string
 
-	ProfileCount int32
-	B3Mode bool
-	ProfileSize int32
-	DiscardType XlogDiscardType
+	ProfileCount                   int32
+	B3Mode                         bool
+	ProfileSize                    int32
+	DiscardType                    XlogDiscardType
 	IgnoreGlobalConsequentSampling bool
 }
 
@@ -167,9 +167,7 @@ func (pack *XlogPack) ToString() string {
 	return str
 }
 
-//GetPackType returns pack type
+// GetPackType returns pack type
 func (pack *XlogPack) GetPackType() byte {
 	return packconstants.XLOG
 }
-
-

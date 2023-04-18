@@ -3,7 +3,7 @@ package netdata
 import (
 	"strconv"
 
-	packconstants "github.com/scouter-contrib/scouter-agent-golang/scouterx/common/constants/packconstant"
+	packconstants "github.com/zbum/scouter-agent-golang/scouterx/common/constants/packconstant"
 )
 
 // ObjectPack2 has object info
@@ -78,7 +78,7 @@ func (objectPack *ObjectPack) Write(out *DataOutputX) error {
 	return err
 }
 
-func (objectPack *ObjectPack2) Read(in *DataInputX) (Pack, error){
+func (objectPack *ObjectPack2) Read(in *DataInputX) (Pack, error) {
 	var err error
 	objectPack.SiteID, err = in.ReadString()
 	objectPack.ObjType, err = in.ReadString()
@@ -145,12 +145,12 @@ func (objectPack *ObjectPack2) SetStatus(status int) {
 	objectPack.Tags.Put("status", status)
 }
 
-//GetPackType returns pack type
+// GetPackType returns pack type
 func (objectPack *ObjectPack2) GetPackType() byte {
 	return packconstants.OBJECT
 }
 
-//GetPackType returns pack type
+// GetPackType returns pack type
 func (objectPack *ObjectPack) GetPackType() byte {
 	return packconstants.OBJECT
 }

@@ -1,11 +1,11 @@
 package tcpclient
 
 import (
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/conf"
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/common/constants/netcafeconstant"
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/common/constants/tcpflag"
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/common/logger"
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/common/netdata"
+	"github.com/zbum/scouter-agent-golang/scouterx/common/constants/netcafeconstant"
+	"github.com/zbum/scouter-agent-golang/scouterx/common/constants/tcpflag"
+	"github.com/zbum/scouter-agent-golang/scouterx/common/logger"
+	"github.com/zbum/scouter-agent-golang/scouterx/common/netdata"
+	"github.com/zbum/scouter-agent-golang/scouterx/conf"
 	"net"
 	"strconv"
 	"sync"
@@ -23,7 +23,7 @@ type TCPClient struct {
 	connectionTimeout int
 	soTimeout         int
 	localAddr         string
-	objHash			  int32
+	objHash           int32
 }
 
 func GetTcpClient() *TCPClient {

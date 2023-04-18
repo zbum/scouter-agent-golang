@@ -3,22 +3,22 @@ package netdata
 import (
 	"strconv"
 
-	valueconstants "github.com/scouter-contrib/scouter-agent-golang/scouterx/common/constants/valueconstant"
+	valueconstants "github.com/zbum/scouter-agent-golang/scouterx/common/constants/valueconstant"
 )
 
-//DecimalValue struct has number value
+// DecimalValue struct has number value
 type DecimalValue struct {
 	Value int64
 }
 
-//NewDecimalValue return DeciamlValue instance
+// NewDecimalValue return DeciamlValue instance
 func NewDecimalValue(value int64) *DecimalValue {
 	decimalValue := new(DecimalValue)
 	decimalValue.Value = value
 	return decimalValue
 }
 
-//NewDecimalEmptyValue return DeciamlValue instance
+// NewDecimalEmptyValue return DeciamlValue instance
 func NewDecimalEmptyValue() *DecimalValue {
 	decimalValue := new(DecimalValue)
 	return decimalValue

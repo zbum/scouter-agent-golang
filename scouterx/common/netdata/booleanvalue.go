@@ -1,10 +1,10 @@
 package netdata
 
 import (
-	valueconstants "github.com/scouter-contrib/scouter-agent-golang/scouterx/common/constants/valueconstant"
+	valueconstants "github.com/zbum/scouter-agent-golang/scouterx/common/constants/valueconstant"
 )
 
-//BooleanValue has bool value
+// BooleanValue has bool value
 type BooleanValue struct {
 	Value bool
 }
@@ -19,7 +19,7 @@ func NewBooleanValue(value bool) *BooleanValue {
 }
 */
 
-//NewBooleanValue return new BooleanVaue instance
+// NewBooleanValue return new BooleanVaue instance
 func NewBooleanValue(value bool) *BooleanValue {
 	booleanValue := new(BooleanValue)
 	booleanValue.Value = value
@@ -27,13 +27,13 @@ func NewBooleanValue(value bool) *BooleanValue {
 
 }
 
-//NewBooleanEmptyValue return new BooleanVaue instance
+// NewBooleanEmptyValue return new BooleanVaue instance
 func NewBooleanEmptyValue() *BooleanValue {
 	BooleanValue := new(BooleanValue)
 	return BooleanValue
 }
 
-//GetValueType returns value type
+// GetValueType returns value type
 func (booleanValue *BooleanValue) GetValueType() byte {
 	return valueconstants.BOOLEAN
 }

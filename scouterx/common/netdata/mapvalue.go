@@ -1,15 +1,15 @@
 package netdata
 
 import (
-	valueconstants "github.com/scouter-contrib/scouter-agent-golang/scouterx/common/constants/valueconstant"
+	valueconstants "github.com/zbum/scouter-agent-golang/scouterx/common/constants/valueconstant"
 )
 
-//MapValue has map data
+// MapValue has map data
 type MapValue struct {
 	Table map[string]Value
 }
 
-//NewMapValue returns new MapValue instance
+// NewMapValue returns new MapValue instance
 func NewMapValue() *MapValue {
 	mapValue := new(MapValue)
 	mapValue.Table = make(map[string]Value)

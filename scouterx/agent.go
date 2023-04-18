@@ -1,16 +1,16 @@
 package scouterx
 
 import (
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/common"
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/conf"
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/netio"
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/strace"
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/task/agenttask"
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/task/countertask"
+	"github.com/zbum/scouter-agent-golang/scouterx/common"
+	"github.com/zbum/scouter-agent-golang/scouterx/conf"
+	"github.com/zbum/scouter-agent-golang/scouterx/netio"
+	"github.com/zbum/scouter-agent-golang/scouterx/strace"
+	"github.com/zbum/scouter-agent-golang/scouterx/task/agenttask"
+	"github.com/zbum/scouter-agent-golang/scouterx/task/countertask"
 	"sync"
 )
 
-type objNameChangeObserver struct {}
+type objNameChangeObserver struct{}
 
 var agentOnce sync.Once
 var observer objNameChangeObserver
@@ -35,5 +35,3 @@ func Init() {
 		countertask.Start()
 	})
 }
-
-

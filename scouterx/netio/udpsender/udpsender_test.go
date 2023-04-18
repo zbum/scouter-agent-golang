@@ -6,9 +6,9 @@ import (
 	"testing"
 	"time"
 
-	timeconstants "github.com/scouter-contrib/scouter-agent-golang/scouterx/common/constants/timeconstant"
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/common/netdata"
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/common/util"
+	timeconstants "github.com/zbum/scouter-agent-golang/scouterx/common/constants/timeconstant"
+	"github.com/zbum/scouter-agent-golang/scouterx/common/netdata"
+	"github.com/zbum/scouter-agent-golang/scouterx/common/util"
 )
 
 func TestSendPerfPack(t *testing.T) {

@@ -1,11 +1,11 @@
 package netio
 
 import (
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/conf"
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/netio/udpsender"
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/common/netdata"
-	util "github.com/scouter-contrib/scouter-agent-golang/scouterx/common/util"
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/common/util/keygen"
+	"github.com/zbum/scouter-agent-golang/scouterx/common/netdata"
+	util "github.com/zbum/scouter-agent-golang/scouterx/common/util"
+	"github.com/zbum/scouter-agent-golang/scouterx/common/util/keygen"
+	"github.com/zbum/scouter-agent-golang/scouterx/conf"
+	"github.com/zbum/scouter-agent-golang/scouterx/netio/udpsender"
 	"os"
 	"strconv"
 	"testing"

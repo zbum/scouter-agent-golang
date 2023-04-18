@@ -2,12 +2,12 @@ package netio
 
 import (
 	"fmt"
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/common/netdata"
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/common/netdata/texttype"
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/common/structure/lra"
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/common/util"
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/conf"
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/netio/udpsender"
+	"github.com/zbum/scouter-agent-golang/scouterx/common/netdata"
+	"github.com/zbum/scouter-agent-golang/scouterx/common/netdata/texttype"
+	"github.com/zbum/scouter-agent-golang/scouterx/common/structure/lra"
+	"github.com/zbum/scouter-agent-golang/scouterx/common/util"
+	"github.com/zbum/scouter-agent-golang/scouterx/conf"
+	"github.com/zbum/scouter-agent-golang/scouterx/netio/udpsender"
 	"time"
 )
 
