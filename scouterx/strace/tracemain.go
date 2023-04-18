@@ -185,7 +185,7 @@ func StartFastHttpService(ctx context.Context, c *fasthttp.RequestCtx) (newCtx c
 		return ctx
 	}
 
-	serviceName := strings.Join([]string{c.URI().String(), "<", string(c.Method()), ">"}, "")
+	serviceName := strings.Join([]string{string(c.URI().Path()), "<", string(c.Method()), ">"}, "")
 
 	//TODO propagation request (gxid, caller)
 	//TODO query profile
