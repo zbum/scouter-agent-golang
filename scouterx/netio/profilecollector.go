@@ -1,19 +1,19 @@
 package netio
 
 import (
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/conf"
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/common/netdata"
+	"github.com/zbum/scouter-agent-golang/scouterx/common/netdata"
+	"github.com/zbum/scouter-agent-golang/scouterx/conf"
 )
 
 var aconf = conf.GetInstance()
 
 type ProfileCollector struct {
-	tctx *TraceContext
-	steps []netdata.Step
-	pos int
+	tctx             *TraceContext
+	steps            []netdata.Step
+	pos              int
 	doingDumpStepJob bool
-	currentLevel int32
-	parentLevel int32
+	currentLevel     int32
+	parentLevel      int32
 }
 
 func NewProfileCollector(tctx *TraceContext) *ProfileCollector {
@@ -52,7 +52,7 @@ func (c *ProfileCollector) Process(ss netdata.Step) {
 	if c.pos >= len(c.steps) {
 		var o = c.steps
 		c.steps = make([]netdata.Step, aconf.ProfileStepMaxKeepInMemoryCount)
-		c.pos = 0;
+		c.pos = 0
 		SendProfile(o, c.tctx)
 	}
 }
@@ -60,7 +60,7 @@ func (c *ProfileCollector) Process(ss netdata.Step) {
 func (c *ProfileCollector) Close(ok bool) {
 	c.checkDumpStep()
 	if c.pos > 0 && ok {
-		SendProfile(c.steps[0 : c.pos], c.tctx)
+		SendProfile(c.steps[0:c.pos], c.tctx)
 	}
 }
 
@@ -81,5 +81,5 @@ func (*ProfileCollector) checkDumpStep() {
 			add(dumpStep);
 		}
 		doingDumpStepJob = false;
-	 */
+	*/
 }

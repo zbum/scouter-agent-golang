@@ -1,6 +1,6 @@
 package netdata
 
-import packconstants "github.com/scouter-contrib/scouter-agent-golang/scouterx/common/constants/packconstant"
+import packconstants "github.com/zbum/scouter-agent-golang/scouterx/common/constants/packconstant"
 
 type AlertLevel uint8
 
@@ -11,13 +11,13 @@ const AlertFatal AlertLevel = 3
 
 // AlertPack has text info
 type AlertPack struct {
-	Time int64
+	Time    int64
 	ObjType string
 	ObjHash int32
-	Level AlertLevel
-	Title string
+	Level   AlertLevel
+	Title   string
 	Message string
-	Tags *MapValue
+	Tags    *MapValue
 }
 
 func NewAlertPack() *AlertPack {
@@ -51,9 +51,7 @@ func (pack *AlertPack) ToString() string {
 	return str
 }
 
-//GetPackType returns pack type
+// GetPackType returns pack type
 func (pack *AlertPack) GetPackType() byte {
 	return packconstants.ALERT
 }
-
-

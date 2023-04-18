@@ -1,14 +1,14 @@
 package logger
 
 import (
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/common/util"
+	"github.com/zbum/scouter-agent-golang/scouterx/common/util"
 	"io"
 	"log"
 	"os"
 	"path/filepath"
 )
 
-//Init initializes logger
+// Init initializes logger
 func Init() {
 	p := util.GetScouterPath()
 	logPath := filepath.Join(p, "logs")

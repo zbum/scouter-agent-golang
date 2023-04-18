@@ -3,22 +3,22 @@ package netdata
 import (
 	"strconv"
 
-	valueconstants "github.com/scouter-contrib/scouter-agent-golang/scouterx/common/constants/valueconstant"
+	valueconstants "github.com/zbum/scouter-agent-golang/scouterx/common/constants/valueconstant"
 )
 
-//TextHashValue struct has number value
+// TextHashValue struct has number value
 type TextHashValue struct {
 	Value int32
 }
 
-//NewTextHashValue return DeciamlValue instance
+// NewTextHashValue return DeciamlValue instance
 func NewTextHashValue(value int32) *TextHashValue {
 	textHashValue := new(TextHashValue)
 	textHashValue.Value = value
 	return textHashValue
 }
 
-//NewDecimalEmptyValue return DeciamlValue instance
+// NewDecimalEmptyValue return DeciamlValue instance
 func NewTextHashEmptyValue() *TextHashValue {
 	textHashValue := new(TextHashValue)
 	return textHashValue

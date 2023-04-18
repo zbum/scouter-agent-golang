@@ -2,7 +2,7 @@ package scouterx
 
 import (
 	"context"
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/strace"
+	"github.com/zbum/scouter-agent-golang/scouterx/strace"
 	"math/rand"
 	"sync"
 	"testing"
@@ -51,12 +51,11 @@ func randomSleeps() {
 	defer strace.EndService(ctx)
 
 	randomSleep(ctx, 1500)
-	strace.GoWithTrace(ctx, "myGoFunc()", func (cascadeGoCtx context.Context) {
+	strace.GoWithTrace(ctx, "myGoFunc()", func(cascadeGoCtx context.Context) {
 		randomSleep(cascadeGoCtx, 500)
 	})
 	randomSleep(ctx, 800)
 }
-
 
 func randomSleep(ctx context.Context, ms int) {
 	step := strace.StartMethod(ctx)

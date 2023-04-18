@@ -1,13 +1,13 @@
 package countertask
 
 import (
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/common"
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/conf"
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/counter"
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/counter/gocounter"
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/netio"
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/strace/tctxmanager"
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/common/netdata"
+	"github.com/zbum/scouter-agent-golang/scouterx/common"
+	"github.com/zbum/scouter-agent-golang/scouterx/common/netdata"
+	"github.com/zbum/scouter-agent-golang/scouterx/conf"
+	"github.com/zbum/scouter-agent-golang/scouterx/counter"
+	"github.com/zbum/scouter-agent-golang/scouterx/counter/gocounter"
+	"github.com/zbum/scouter-agent-golang/scouterx/netio"
+	"github.com/zbum/scouter-agent-golang/scouterx/strace/tctxmanager"
 	"time"
 )
 

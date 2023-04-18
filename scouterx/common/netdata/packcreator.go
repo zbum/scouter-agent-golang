@@ -1,10 +1,10 @@
 package netdata
 
 import (
-	packconstants "github.com/scouter-contrib/scouter-agent-golang/scouterx/common/constants/packconstant"
+	packconstants "github.com/zbum/scouter-agent-golang/scouterx/common/constants/packconstant"
 )
 
-//CreateValue return Value instacne
+// CreateValue return Value instacne
 func CreatePack(packType byte) Pack {
 	switch packType {
 	case packconstants.MAP:

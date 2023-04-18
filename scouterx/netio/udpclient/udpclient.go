@@ -2,16 +2,16 @@ package udpclient
 
 import (
 	"container/list"
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/common/constants/netcafeconstant"
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/common/logger"
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/common/netdata"
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/common/util"
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/common/util/keygen"
+	"github.com/zbum/scouter-agent-golang/scouterx/common/constants/netcafeconstant"
+	"github.com/zbum/scouter-agent-golang/scouterx/common/logger"
+	"github.com/zbum/scouter-agent-golang/scouterx/common/netdata"
+	"github.com/zbum/scouter-agent-golang/scouterx/common/util"
+	"github.com/zbum/scouter-agent-golang/scouterx/common/util/keygen"
 	"net"
 	"strconv"
 )
 
-//UDPClient is a upp socket client
+// UDPClient is a upp socket client
 type UDPClient struct {
 	Conn          *net.UDPConn
 	remoteAddress string
@@ -19,18 +19,17 @@ type UDPClient struct {
 	udpMaxBytes   int
 }
 
-//NewUDPClient returns new udpclient instance
-func New(addr string , port int) *UDPClient {
+// NewUDPClient returns new udpclient instance
+func New(addr string, port int) *UDPClient {
 	udpclient := &UDPClient{remoteAddress: addr, remotePort: port}
 	udpclient.open()
 	udpclient.udpMaxBytes = 60000
 	return udpclient
 }
 
-func (udpClient *UDPClient) SetUDPMaxBytes (max int) {
+func (udpClient *UDPClient) SetUDPMaxBytes(max int) {
 	udpClient.udpMaxBytes = max
 }
-
 
 func (udpClient *UDPClient) open() error {
 	if udpClient.Conn != nil {
@@ -70,11 +69,11 @@ func (udpClient *UDPClient) writeMTU(data []byte, packetSize int) bool {
 	}
 	var num int
 
-	for num = 0; num < len(data) / packetSize; num++ {
-		udpClient.writeMTUSub(pkid, total, num,  util.CopyArray(data, num*packetSize, packetSize))
+	for num = 0; num < len(data)/packetSize; num++ {
+		udpClient.writeMTUSub(pkid, total, num, util.CopyArray(data, num*packetSize, packetSize))
 	}
 	if remainder > 0 {
-		udpClient.writeMTUSub(pkid, total, num,  util.CopyArray(data, len(data)-remainder, remainder))
+		udpClient.writeMTUSub(pkid, total, num, util.CopyArray(data, len(data)-remainder, remainder))
 	}
 	return true
 }
@@ -124,12 +123,12 @@ func (udpClient *UDPClient) WriteBufferList(bufferList *list.List) bool {
 	}
 	out := netdata.NewDataOutputX(nil)
 	var outCount int16
-	for buffer:= bufferList.Front(); buffer != nil; buffer = buffer.Next() {
+	for buffer := bufferList.Front(); buffer != nil; buffer = buffer.Next() {
 		b := buffer.Value.([]byte)
 		buffLen := len(b)
 		if buffLen > udpClient.udpMaxBytes {
 			udpClient.writeMTU(b, udpClient.udpMaxBytes)
-		} else if buffLen+ int(out.GetWriteSize()) > udpClient.udpMaxBytes {
+		} else if buffLen+int(out.GetWriteSize()) > udpClient.udpMaxBytes {
 			udpClient.sendBufferList(outCount, out.Bytes())
 			out = netdata.NewDataOutputX(nil)
 			outCount = 1
@@ -145,4 +144,3 @@ func (udpClient *UDPClient) WriteBufferList(bufferList *list.List) bool {
 
 	return true
 }
-

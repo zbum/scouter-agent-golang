@@ -1,15 +1,15 @@
 package netdata
 
 import (
-	packconstants "github.com/scouter-contrib/scouter-agent-golang/scouterx/common/constants/packconstant"
+	packconstants "github.com/zbum/scouter-agent-golang/scouterx/common/constants/packconstant"
 	"strconv"
 )
 
 type XlogProfilePack struct {
-	Time int64
+	Time    int64
 	ObjHash int32
 	Service int32
-	Txid int64
+	Txid    int64
 	Elapsed int32
 	Profile []byte
 }
@@ -43,5 +43,3 @@ func (pack *XlogProfilePack) ToString() string {
 func (pack *XlogProfilePack) GetPackType() byte {
 	return packconstants.XLOG_PROFILE
 }
-
-

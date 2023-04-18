@@ -1,10 +1,10 @@
 package netdata
 
 import (
-	valueconstants "github.com/scouter-contrib/scouter-agent-golang/scouterx/common/constants/valueconstant"
+	valueconstants "github.com/zbum/scouter-agent-golang/scouterx/common/constants/valueconstant"
 )
 
-//CreateValue return Value instance
+// CreateValue return Value instance
 func CreateValue(valueType byte) Value {
 	switch valueType {
 	case valueconstants.NULL:

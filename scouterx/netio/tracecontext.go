@@ -1,9 +1,9 @@
 package netio
 
 import (
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/common/netdata"
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/common/util"
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/common/util/keygen"
+	"github.com/zbum/scouter-agent-golang/scouterx/common/netdata"
+	"github.com/zbum/scouter-agent-golang/scouterx/common/util"
+	"github.com/zbum/scouter-agent-golang/scouterx/common/util/keygen"
 	"strconv"
 	"time"
 )
@@ -95,7 +95,7 @@ func NewNoopTraceContext() *TraceContext {
 	return context
 }
 
-func (tctx (TraceContext)) ToXlog(discardType netdata.XlogDiscardType, elapsed int32) *netdata.XlogPack {
+func (tctx TraceContext) ToXlog(discardType netdata.XlogDiscardType, elapsed int32) *netdata.XlogPack {
 	xlog := netdata.NewXlogPack()
 	xlog.Elapsed = elapsed
 	xlog.Service = tctx.ServiceHash

@@ -1,24 +1,24 @@
 package netdata
 
 import (
-	packconstants "github.com/scouter-contrib/scouter-agent-golang/scouterx/common/constants/packconstant"
+	packconstants "github.com/zbum/scouter-agent-golang/scouterx/common/constants/packconstant"
 )
 
-//PerfCounterPack has metric counter which has key/value type
+// PerfCounterPack has metric counter which has key/value type
 type PerfCounterK8SPack struct {
-	Time     int64
-	SiteID	string
-	Cluster string
-	NameSpace string
-	NodeName string
-	DaemonSetName string
+	Time           int64
+	SiteID         string
+	Cluster        string
+	NameSpace      string
+	NodeName       string
+	DaemonSetName  string
 	DeploymentName string
-	PodName string
-	ContainerName string
-	ObjName string
-	Timetype int8
-	MetricLevel int8
-	Data     *MapValue
+	PodName        string
+	ContainerName  string
+	ObjName        string
+	Timetype       int8
+	MetricLevel    int8
+	Data           *MapValue
 }
 
 // NewPerfCounterPack returns PerfCounterPack instance
@@ -94,7 +94,7 @@ func (pack *PerfCounterK8SPack) ToString() string {
 	return str
 }
 
-//GetPackType returns pack type
+// GetPackType returns pack type
 func (pack *PerfCounterK8SPack) GetPackType() byte {
 	return packconstants.PERFCOUNTER_K8S
 }

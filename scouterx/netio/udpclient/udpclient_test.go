@@ -2,14 +2,14 @@ package udpclient
 
 import (
 	"container/list"
-	timeconstants "github.com/scouter-contrib/scouter-agent-golang/scouterx/common/constants/timeconstant"
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/common/netdata"
+	timeconstants "github.com/zbum/scouter-agent-golang/scouterx/common/constants/timeconstant"
+	"github.com/zbum/scouter-agent-golang/scouterx/common/netdata"
 	"testing"
 	"time"
 )
 
 func TestUDPClient(t *testing.T) {
-	udpclient := New("127.0.0.1",6100)
+	udpclient := New("127.0.0.1", 6100)
 	perfPack := netdata.NewPerfCounterPack()
 	perfPack.Put("abd", 123)
 	perfPack.ObjName = "testObj"
@@ -21,10 +21,9 @@ func TestUDPClient(t *testing.T) {
 
 }
 
-
 func TestMultiPacket(t *testing.T) {
 
-	udpclient := New("127.0.0.1",6100)
+	udpclient := New("127.0.0.1", 6100)
 	udpclient.SetUDPMaxBytes(10)
 	perfPack := netdata.NewPerfCounterPack()
 	perfPack.Put("abd", 123)
@@ -37,7 +36,7 @@ func TestMultiPacket(t *testing.T) {
 }
 
 func TestSendList(t *testing.T) {
-	udpclient := New("127.0.0.1",6100)
+	udpclient := New("127.0.0.1", 6100)
 	packList := list.New()
 
 	perfPack := netdata.NewPerfCounterPack()
@@ -59,7 +58,7 @@ func TestSendList(t *testing.T) {
 }
 
 func TestDataOutput(t *testing.T) {
-	udpclient := New("127.0.0.1",6100)
+	udpclient := New("127.0.0.1", 6100)
 	out := netdata.NewDataOutputX(udpclient.Conn)
 	out.WriteInt32(123344)
 }

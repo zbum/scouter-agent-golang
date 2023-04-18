@@ -2,14 +2,14 @@ package udpsender
 
 import (
 	"container/list"
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/conf"
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/netio/udpclient"
+	"github.com/zbum/scouter-agent-golang/scouterx/conf"
+	"github.com/zbum/scouter-agent-golang/scouterx/netio/udpclient"
 	"sync"
 	"time"
 
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/common/factory/channelfactory"
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/common/logger"
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/common/netdata"
+	"github.com/zbum/scouter-agent-golang/scouterx/common/factory/channelfactory"
+	"github.com/zbum/scouter-agent-golang/scouterx/common/logger"
+	"github.com/zbum/scouter-agent-golang/scouterx/common/netdata"
 )
 
 var once sync.Once
@@ -118,7 +118,6 @@ func (udpSender *UDPSender) run() {
 		}
 	}
 }
-
 
 func (udpSender *UDPSender) getQueueSize() int {
 	return len(udpSender.udpChannel)

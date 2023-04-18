@@ -1,10 +1,10 @@
 package counter
 
 import (
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/conf"
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/counter/gocounter"
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/netio"
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/common/netdata"
+	"github.com/zbum/scouter-agent-golang/scouterx/common/netdata"
+	"github.com/zbum/scouter-agent-golang/scouterx/conf"
+	"github.com/zbum/scouter-agent-golang/scouterx/counter/gocounter"
+	"github.com/zbum/scouter-agent-golang/scouterx/netio"
 	"time"
 )
 

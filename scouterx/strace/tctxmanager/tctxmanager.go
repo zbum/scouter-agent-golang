@@ -3,14 +3,15 @@ package tctxmanager
 import (
 	"context"
 	"fmt"
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/common/netdata"
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/common/structure/lra"
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/conf"
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/netio"
+	"github.com/zbum/scouter-agent-golang/scouterx/common/netdata"
+	"github.com/zbum/scouter-agent-golang/scouterx/common/structure/lra"
+	"github.com/zbum/scouter-agent-golang/scouterx/conf"
+	"github.com/zbum/scouter-agent-golang/scouterx/netio"
 	"time"
 )
 
 type ctxKey struct{}
+
 var tctxKey = ctxKey{}
 
 var ac = conf.GetInstance()
@@ -80,7 +81,7 @@ func GetActiveCount() [3]int64 {
 	now := time.Now()
 	for _, v := range values {
 		count++
-		if  count > max {
+		if count > max {
 			return active
 		}
 		tctx := v.(*netio.TraceContext)

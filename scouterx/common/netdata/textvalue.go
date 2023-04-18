@@ -1,7 +1,7 @@
 package netdata
 
 import (
-	valueconstants "github.com/scouter-contrib/scouter-agent-golang/scouterx/common/constants/valueconstant"
+	valueconstants "github.com/zbum/scouter-agent-golang/scouterx/common/constants/valueconstant"
 )
 
 // TextValue contains string value

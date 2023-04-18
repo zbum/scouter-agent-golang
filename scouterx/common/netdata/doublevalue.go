@@ -3,7 +3,7 @@ package netdata
 import (
 	"strconv"
 
-	valueconstants "github.com/scouter-contrib/scouter-agent-golang/scouterx/common/constants/valueconstant"
+	valueconstants "github.com/zbum/scouter-agent-golang/scouterx/common/constants/valueconstant"
 )
 
 type DoubleValue struct {
@@ -16,7 +16,7 @@ func NewDoubleValue(value float64) *DoubleValue {
 	return doubleValue
 }
 
-//NewFloatEmptyValue returns new FloatValue instance
+// NewFloatEmptyValue returns new FloatValue instance
 func NewDoubleEmptyValue() *DoubleValue {
 	doubleValue := new(DoubleValue)
 	return doubleValue

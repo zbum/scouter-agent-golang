@@ -1,17 +1,17 @@
 package netdata
 
 import (
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/common/netdata/texttype"
+	"github.com/zbum/scouter-agent-golang/scouterx/common/netdata/texttype"
 	"strconv"
 
-	packconstants "github.com/scouter-contrib/scouter-agent-golang/scouterx/common/constants/packconstant"
+	packconstants "github.com/zbum/scouter-agent-golang/scouterx/common/constants/packconstant"
 )
 
 // TextPack has text info
 type TextPack struct {
 	Xtype texttype.TextType
-	Hash int32
-	Text string
+	Hash  int32
+	Text  string
 }
 
 func NewTextPack() *TextPack {
@@ -39,9 +39,7 @@ func (pack *TextPack) ToString() string {
 	return str
 }
 
-//GetPackType returns pack type
+// GetPackType returns pack type
 func (pack *TextPack) GetPackType() byte {
 	return packconstants.TEXT
 }
-
-

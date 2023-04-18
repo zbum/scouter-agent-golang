@@ -3,8 +3,8 @@ package conf
 import (
 	"github.com/emirpasic/gods/maps/linkedhashmap"
 	"github.com/magiconair/properties"
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/common/logger"
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/common/util"
+	"github.com/zbum/scouter-agent-golang/scouterx/common/logger"
+	"github.com/zbum/scouter-agent-golang/scouterx/common/util"
 	"os"
 	"path/filepath"
 	"strconv"
@@ -26,7 +26,7 @@ const vtBool = 3
 const vtCommaSeparatedValue = 4
 const vtCommaColonSeparatedValue = 5
 
-//var descMap = make(map[string]ConfigureDesc)
+// var descMap = make(map[string]ConfigureDesc)
 var descMap = linkedhashmap.New()
 
 type ConfigureDesc struct {
@@ -42,85 +42,84 @@ type Configure struct {
 
 	lastModified time.Time
 
-	_trace bool
+	_trace       bool
 	TraceObjSend bool
 
-	SendQueueSize int
-	ObjHash int32
-	ObjName string
-	ObjType string
-	ObjNameSimple string
-	NetCollectorIP string
-	NetCollectorUDPPort int
-	NetCollectorTCPPort int
-	NetCollectorTcpSoTimeoutMs int
+	SendQueueSize                      int
+	ObjHash                            int32
+	ObjName                            string
+	ObjType                            string
+	ObjNameSimple                      string
+	NetCollectorIP                     string
+	NetCollectorUDPPort                int
+	NetCollectorTCPPort                int
+	NetCollectorTcpSoTimeoutMs         int
 	NetCollectorTcpConnectionTimeoutMs int
-	UDPMaxBytes int
+	UDPMaxBytes                        int
 
-	StuckServiceBaseTimeMs int
+	StuckServiceBaseTimeMs    int
 	StuckServiceRemoveEnabled bool
-	StuckServiceAlertEnabled bool
+	StuckServiceAlertEnabled  bool
 
 	TraceActiveserviceYellowTime int
-	TraceActiveserviceRedTime int
+	TraceActiveserviceRedTime    int
 
 	ProfileStepMaxKeepInMemoryCount int
-	ProfileStepMaxCount int
+	ProfileStepMaxCount             int
 
 	ProfileHttpQuerystringEnabled bool
-	ProfileHttpHeaderEnabled bool
-	ProfileHttpHeaderKeys string
+	ProfileHttpHeaderEnabled      bool
+	ProfileHttpHeaderKeys         string
 
 	TraceHttpClientIpHeaderKey string
 
-	XlogDiscardServicePatterns string
+	XlogDiscardServicePatterns  string
 	XlogDiscardServiceShowError bool
 
 	XlogSamplingExcludePatterns string
 
-	XlogSamplingEnabled bool
-	XlogSamplingOnlyProfile bool
-	XlogSamplingStep1Ms int32
+	XlogSamplingEnabled      bool
+	XlogSamplingOnlyProfile  bool
+	XlogSamplingStep1Ms      int32
 	XlogSamplingStep1RatePct int
-	XlogSamplingStep2Ms int32
+	XlogSamplingStep2Ms      int32
 	XlogSamplingStep2RatePct int
-	XlogSamplingStep3Ms int32
+	XlogSamplingStep3Ms      int32
 	XlogSamplingStep3RatePct int
-	XlogSamplingOverRatePct int
+	XlogSamplingOverRatePct  int
 
-	XlogPatternedSamplingEnabled bool
+	XlogPatternedSamplingEnabled         bool
 	XlogPatternedSamplingServicePatterns string
-	XlogPatternedSamplingOnlyProfile bool
-	XlogPatternedSamplingStep1Ms int32
-	XlogPatternedSamplingStep1RatePct int
-	XlogPatternedSamplingStep2Ms int32
-	XlogPatternedSamplingStep2RatePct int
-	XlogPatternedSamplingStep3Ms int32
-	XlogPatternedSamplingStep3RatePct int
-	XlogPatternedSamplingOverRatePct int
+	XlogPatternedSamplingOnlyProfile     bool
+	XlogPatternedSamplingStep1Ms         int32
+	XlogPatternedSamplingStep1RatePct    int
+	XlogPatternedSamplingStep2Ms         int32
+	XlogPatternedSamplingStep2RatePct    int
+	XlogPatternedSamplingStep3Ms         int32
+	XlogPatternedSamplingStep3RatePct    int
+	XlogPatternedSamplingOverRatePct     int
 
-	XlogPatterned2SamplingEnabled bool
+	XlogPatterned2SamplingEnabled         bool
 	XlogPatterned2SamplingServicePatterns string
-	XlogPatterned2SamplingOnlyProfile bool
-	XlogPatterned2SamplingStep1Ms int32
-	XlogPatterned2SamplingStep1RatePct int
-	XlogPatterned2SamplingStep2Ms int32
-	XlogPatterned2SamplingStep2RatePct int
-	XlogPatterned2SamplingStep3Ms int32
-	XlogPatterned2SamplingStep3RatePct int
-	XlogPatterned2SamplingOverRatePct int
+	XlogPatterned2SamplingOnlyProfile     bool
+	XlogPatterned2SamplingStep1Ms         int32
+	XlogPatterned2SamplingStep1RatePct    int
+	XlogPatterned2SamplingStep2Ms         int32
+	XlogPatterned2SamplingStep2RatePct    int
+	XlogPatterned2SamplingStep3Ms         int32
+	XlogPatterned2SamplingStep3RatePct    int
+	XlogPatterned2SamplingOverRatePct     int
 
-	XlogPatterned3SamplingEnabled bool
+	XlogPatterned3SamplingEnabled         bool
 	XlogPatterned3SamplingServicePatterns string
-	XlogPatterned3SamplingOnlyProfile bool
-	XlogPatterned3SamplingStep1Ms int32
-	XlogPatterned3SamplingStep1RatePct int
-	XlogPatterned3SamplingStep2Ms int32
-	XlogPatterned3SamplingStep2RatePct int
-	XlogPatterned3SamplingStep3Ms int32
-	XlogPatterned3SamplingStep3RatePct int
-	XlogPatterned3SamplingOverRatePct int
-
+	XlogPatterned3SamplingOnlyProfile     bool
+	XlogPatterned3SamplingStep1Ms         int32
+	XlogPatterned3SamplingStep1RatePct    int
+	XlogPatterned3SamplingStep2Ms         int32
+	XlogPatterned3SamplingStep2RatePct    int
+	XlogPatterned3SamplingStep3Ms         int32
+	XlogPatterned3SamplingStep3RatePct    int
+	XlogPatterned3SamplingOverRatePct     int
 }
 
 var configure *Configure
@@ -196,12 +195,12 @@ func (conf *Configure) resetObjNameAndType(props *properties.Properties) {
 	}
 
 	oldObjName := conf.ObjName
-	newObjSimpleName := stringOf(props,"obj_name", defaultName, "object name")
+	newObjSimpleName := stringOf(props, "obj_name", defaultName, "object name")
 	conf.ObjNameSimple = newObjSimpleName
 	conf.ObjName = "/" + hostname + "/" + newObjSimpleName
 	conf.ObjHash = util.HashString(conf.ObjName)
 
-	conf.ObjType = stringOf(props,"obj_type", "golang", "object type(monitoring group)")
+	conf.ObjType = stringOf(props, "obj_type", "golang", "object type(monitoring group)")
 	if oldObjName != conf.ObjName {
 		objChangeNotify()
 	}
@@ -245,7 +244,7 @@ func (conf *Configure) Refresh() {
 		if fileProps != nil {
 			props.Merge(fileProps)
 		}
-		props = props.FilterFunc(func (k, v string) bool {
+		props = props.FilterFunc(func(k, v string) bool {
 			return v != ""
 		})
 
@@ -411,6 +410,3 @@ func (conf *Configure) addToConf(props *properties.Properties) {
 	conf.XlogPatterned3SamplingStep3RatePct = intOf(props, "xlog_patterned3_sampling_step3_rate_pct", 15, "")
 	conf.XlogPatterned3SamplingOverRatePct = intOf(props, "xlog_patterned3_sampling_over_rate_pct", 3000, "")
 }
-
-
-

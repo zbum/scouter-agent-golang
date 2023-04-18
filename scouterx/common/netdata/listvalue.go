@@ -3,15 +3,15 @@ package netdata
 import (
 	"strconv"
 
-	valueconstants "github.com/scouter-contrib/scouter-agent-golang/scouterx/common/constants/valueconstant"
+	valueconstants "github.com/zbum/scouter-agent-golang/scouterx/common/constants/valueconstant"
 )
 
-//ListValue has Value type Slice
+// ListValue has Value type Slice
 type ListValue struct {
 	Value []Value
 }
 
-//NewListValue returns new ListVaue instance
+// NewListValue returns new ListVaue instance
 func NewListValue() *ListValue {
 	listValue := new(ListValue)
 	listValue.Value = make([]Value, 0)
@@ -27,7 +27,7 @@ func NewListValueWithSize(size int) *ListValue {
 }
 */
 
-//NewListValueWithValue returns new ListVaue instance
+// NewListValueWithValue returns new ListVaue instance
 func NewListValueWithValue(value []Value) *ListValue {
 	listValue := new(ListValue)
 	listValue.Value = value
@@ -140,7 +140,7 @@ func (listValue *ListValue) Read(in *DataInputX) (Value, error) {
 	size, err := in.ReadDecimal()
 	for i := int64(0); i < size; i++ {
 		var value Value
-		value , err = in.ReadValue()
+		value, err = in.ReadValue()
 		listValue.Value = append(listValue.Value, value)
 	}
 	return listValue, err

@@ -3,15 +3,16 @@ package strace
 import (
 	"context"
 	"fmt"
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/common"
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/common/netdata"
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/common/util"
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/common/util/keygen"
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/conf"
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/counter"
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/netio"
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/netio/tcpclient"
-	"github.com/scouter-contrib/scouter-agent-golang/scouterx/strace/tctxmanager"
+	"github.com/valyala/fasthttp"
+	"github.com/zbum/scouter-agent-golang/scouterx/common"
+	"github.com/zbum/scouter-agent-golang/scouterx/common/netdata"
+	"github.com/zbum/scouter-agent-golang/scouterx/common/util"
+	"github.com/zbum/scouter-agent-golang/scouterx/common/util/keygen"
+	"github.com/zbum/scouter-agent-golang/scouterx/conf"
+	"github.com/zbum/scouter-agent-golang/scouterx/counter"
+	"github.com/zbum/scouter-agent-golang/scouterx/netio"
+	"github.com/zbum/scouter-agent-golang/scouterx/netio/tcpclient"
+	"github.com/zbum/scouter-agent-golang/scouterx/strace/tctxmanager"
 	"net/http"
 	"runtime"
 	"strconv"
@@ -175,10 +176,46 @@ func StartHttpService(ctx context.Context, req *http.Request) (newCtx context.Co
 	return newCtx
 }
 
+func StartFastHttpService(ctx context.Context, c *fasthttp.RequestCtx) (newCtx context.Context) {
+	defer common.ReportScouterPanic()
+	if ctx == nil {
+		return context.Background()
+	}
+	if tctxmanager.GetTraceContext(ctx) != nil {
+		return ctx
+	}
+
+	serviceName := strings.Join([]string{c.URI().String(), "<", string(c.Method()), ">"}, "")
+
+	//TODO propagation request (gxid, caller)
+	//TODO query profile
+	//TODO body (of specific service) profile
+
+	newCtx, tctx := startService(ctx, serviceName, getFastHttpRemoteIp(c))
+	tctx.XType = netdata.XTYPE_WEB_SERVICE
+	tctx.UserAgent = netio.SendUserAgent(string(c.UserAgent()))
+	tctx.HttpMethod = string(c.Method())
+	tctx.Referer = netio.SendReferer(string(c.Referer()))
+	profileFastHttpHeaders(c, tctx)
+
+	return newCtx
+}
+
 func getRemoteIp(req *http.Request) string {
 	ip := req.RemoteAddr
 	if ac.TraceHttpClientIpHeaderKey != "" {
 		headerIp := req.Header.Get(ac.TraceHttpClientIpHeaderKey)
+		if headerIp != "" {
+			ip = headerIp
+		}
+	}
+	return ip
+}
+
+func getFastHttpRemoteIp(req *fasthttp.RequestCtx) string {
+	ip := req.RemoteAddr().String()
+	if ac.TraceHttpClientIpHeaderKey != "" {
+		headerIp := string(req.Request.Header.Peek(ac.TraceHttpClientIpHeaderKey))
 		if headerIp != "" {
 			ip = headerIp
 		}
@@ -281,11 +318,11 @@ func inheritTctx(newTctx *netio.TraceContext, parentTctx *netio.TraceContext) *n
 	return newTctx
 }
 
-//<usage> for chained goroutine tracing
+// <usage> for chained goroutine tracing
 //
-//GoWithTrace(ctx, "myFuncName()", func(cascadeGoCtx context.Context) {
-//	myFunc(cascadeGoCtx)
-//})
+//	GoWithTrace(ctx, "myFuncName()", func(cascadeGoCtx context.Context) {
+//		myFunc(cascadeGoCtx)
+//	})
 func GoWithTrace(ctx context.Context, serviceName string, func4Goroutine func(cascadeGoCtx context.Context)) {
 	defer common.ReportScouterPanic()
 	newCtx, childTctx := startChildGoroutineService(ctx, serviceName)
@@ -523,6 +560,41 @@ func profileHttpHeaders(r *http.Request, tctx *netio.TraceContext) {
 	}
 }
 
+func profileFastHttpHeaders(c *fasthttp.RequestCtx, tctx *netio.TraceContext) {
+	startTime := util.MillisToNow(tctx.StartTime)
+	if ac.ProfileHttpHeaderEnabled {
+		notAll := len(ac.ProfileHttpHeaderKeys) > 0
+		if notAll {
+			split := strings.Split(ac.ProfileHttpHeaderKeys, ",")
+			for _, k := range split {
+				all := c.Request.Header.PeekAll(strings.TrimSpace(k))
+				values := make([]string, len(all))
+				for i, vByte := range all {
+					values[i] = string(vByte)
+				}
+				if values != nil && len(values) > 0 {
+					v := strings.Join(values, ",")
+					tctx.Profile.Add(netdata.NewMessageStep(fmt.Sprintf("header: %s: %s", k, v), startTime))
+				}
+			}
+		} else {
+			for _, k := range c.Request.Header.PeekKeys() {
+				all := c.Request.Header.PeekAll(string(k))
+				values := make([]string, len(all))
+				for i, vByte := range all {
+					values[i] = string(vByte)
+				}
+				vs := strings.Join(values, ",")
+				tctx.Profile.Add(netdata.NewMessageStep(fmt.Sprintf("header: %s: %s", k, vs), startTime))
+			}
+		}
+	}
+
+	if ac.ProfileHttpQuerystringEnabled {
+		tctx.Profile.Add(netdata.NewMessageStep(fmt.Sprintf("query: %s", c.QueryArgs()), startTime))
+	}
+}
+
 func StartApiCall(ctx context.Context, apiCallName string, address string) *netdata.ApiCallStep {
 	defer common.ReportScouterPanic()
 	if ctx == nil {
@@ -579,7 +651,6 @@ func startApiCall(apiCallName string, tctx *netio.TraceContext, address string) 
 	return step
 }
 
-
 func EndApiCall(ctx context.Context, step *netdata.ApiCallStep, err error) {
 	defer common.ReportScouterPanic()
 
@@ -601,4 +672,3 @@ func EndApiCall(ctx context.Context, step *netdata.ApiCallStep, err error) {
 	}
 	tctx.Profile.Pop(step)
 }
-
