@@ -196,8 +196,9 @@ func (conf *Configure) resetObjNameAndType(props *properties.Properties) {
 
 	oldObjName := conf.ObjName
 	newObjSimpleName := stringOf(props, "obj_name", defaultName, "object name")
+	objHostName := stringOf(props, "obj_host_name", hostname, "object host name")
 	conf.ObjNameSimple = newObjSimpleName
-	conf.ObjName = "/" + hostname + "/" + newObjSimpleName
+	conf.ObjName = "/" + objHostName + "/" + newObjSimpleName
 	conf.ObjHash = util.HashString(conf.ObjName)
 
 	conf.ObjType = stringOf(props, "obj_type", "golang", "object type(monitoring group)")
