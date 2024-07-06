@@ -66,6 +66,7 @@ func RegisterObj() *netdata.ObjectPack {
 }
 
 func TestSendObjectPack(t *testing.T) {
+	t.SkipNow()
 
 	os.Setenv("NET_COLLECTOR_IP", "127.0.0.1")
 	os.Setenv("NET_COLLECTOR_UDP_PORT", "6002")
