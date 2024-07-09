@@ -95,7 +95,7 @@ func GetActiveCount() [3]int64 {
 		}
 		if elapsed > ac.StuckServiceBaseTimeMs {
 			fEndStuckServiceForcibly(tctx)
-			message := fmt.Sprintf("service: %s, elapsed: %d, goId: %d, tctxGoId: %d", tctx.ServiceName, elapsed, tctx.Goid)
+			message := fmt.Sprintf("service: %s, elapsed: %d, goId: %d, tctxGoId: %d", tctx.ServiceName, elapsed, tctx.Goid, tctx.Goid)
 			if ac.StuckServiceAlertEnabled {
 				netio.SendAlert(netdata.AlertError, "STUCK_SERVICE", message)
 			} else {

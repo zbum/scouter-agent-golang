@@ -9,7 +9,8 @@ import (
 	"time"
 )
 
-func TestScouterAgent(T *testing.T) {
+func TestScouterAgent(t *testing.T) {
+	t.Skip("Use only local.")
 	wg := sync.WaitGroup{}
 	wg.Add(1)
 
