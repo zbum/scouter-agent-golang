@@ -20,6 +20,10 @@ func (objNameChangeObserver) Run() {
 	netio.SendObjName(ac.ObjName)
 }
 
+func init() {
+	Init()
+}
+
 func Init() {
 	agentOnce.Do(func() {
 		common.RegisterSendPanicF(netio.SendPanic)
